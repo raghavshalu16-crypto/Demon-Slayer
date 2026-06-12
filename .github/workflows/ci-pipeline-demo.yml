@@ -1,0 +1,74 @@
+name: CI Pipeline Demo
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+  build-and-validate:
+
+    runs-on: ubuntu-latest
+
+    env:
+      APPLICATION_NAME: github-actions-demo
+      ENVIRONMENT: training
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Display Pipeline Information
+        run: |
+          echo "Application: $APPLICATION_NAME"
+          echo "Environment: $ENVIRONMENT"
+
+      - name: Display GitHub Context
+        run: |
+          echo "Repository: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Triggered By: ${{ github.actor }}"
+
+      - name: Validate Runner
+        run: |
+          echo "Current User:"
+          whoami
+
+          echo "Hostname:"
+          hostname
+
+          echo "Working Directory:"
+          pwd
+
+      - name: Display Date and Time
+        run: date
+
+      - name: List Repository Files
+        run: ls -la
+
+      - name: Simulate Build Stage
+        run: |
+          echo "Building Application..."
+          sleep 5
+          echo "Build Successful"
+
+      - name: Simulate Test Stage
+        run: |
+          echo "Running Unit Tests..."
+          sleep 5
+          echo "All Tests Passed"
+
+      - name: Simulate Security Validation
+        run: |
+          echo "Checking Security Policies..."
+          echo "Validation Successful"
+
+      - name: Pipeline Completed
+        run: echo "CI Pipeline Executed Successfully"
