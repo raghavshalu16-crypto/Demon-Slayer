@@ -1,0 +1,13 @@
+name: Demon clan
+
+on:
+ push:
+  branches: [main]
+  
+jobs:
+  demo:
+   runs-on: ubuntu-latest
+   
+   steps:
+     - name: Primary antagonist
+     run: echo "Hello, Kizuki!"
